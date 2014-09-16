@@ -4,6 +4,8 @@
 
 * **Introduction**
 
+* **About The Game**
+
 * **Installation**
 
 * **Folder and File Specifications**
@@ -15,10 +17,16 @@
 VersusUnityGame is a test game to be run with the Versus API written in
 the Unity Framework with C#.
 
-It is a bullethell style game where the player is a fighter jet and enemies
-spawned by the game come in waves. Points are awarded for every enemy killed.
+## About The Game
 
-Multiplayer is planned where two players battle each other with various weapons.
+- Modes Planned:
+  1. Single player bullethell style (http://www.youtube.com/watch?v=utGmwWVq-ck)
+    - points awarded for fighters killed
+    - won't be as cool as the video
+  2. Synchronous multiplayer mode
+    - each person controls a fighter
+    - 2-4 players battle in an arena
+    - last man standing wins
 
 ## Installation
 
