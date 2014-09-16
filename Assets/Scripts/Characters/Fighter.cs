@@ -10,7 +10,7 @@ public class Fighter : MonoBehaviour {
 	public float firingSpeed = 0; //ms
 	public string weapon = "";
 	//Movement
-	Vector2 position = Vector2.zero;
+	Vector2 position;
 	int rotation = 0;
 	bool left = false, right = false, up = false, down = false;
 	//Combat
@@ -34,8 +34,10 @@ public class Fighter : MonoBehaviour {
 	void move () {
 		if (left) position.x -= speed * Time.deltaTime;
 		if (right) position.x += speed * Time.deltaTime;
-		if (up) position.y -= speed * Time.deltaTime;
-		if (down) position.y += speed * Time.deltaTime;
+		if (up) position.y += speed * Time.deltaTime;
+		if (down) position.y -= speed * Time.deltaTime;
+		
+		transform.position = new Vector3(position.x,position.y,transform.position.z);
 	}
 	
 	// Combat //
@@ -60,5 +62,14 @@ public class Fighter : MonoBehaviour {
 		
 		//Report death
 		(GameObject.Find("GameMaster").GetComponent("GameController") as GameController).fighterDied (id);
+	}
+	
+	// Public Functions//
+	
+	public void setMovement(string direction, bool truth) {
+		if (direction == "up") up = truth;
+		if (direction == "down") down = truth;
+		if (direction == "left") left = truth;
+		if (direction == "right") right = truth;
 	}
 }

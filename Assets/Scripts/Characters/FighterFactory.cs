@@ -9,6 +9,7 @@ public static class FighterFactory {
 
 	public static GameObject createPlayerFighter (Vector2 position) {
 		GameObject fighter = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		fighter.name = "PlayerFighter";
 		Fighter playerFighter = fighter.AddComponent("Fighter") as Fighter;
 		playerFighter.id = 0;
 		playerFighter.health = (int) CharacterConstants.playerFighter["health"];
@@ -21,6 +22,7 @@ public static class FighterFactory {
 	
 	public static GameObject createBasicEnemy (Vector2 position) {
 		GameObject fighter = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		fighter.name = "BasicEnemy" + fighterID;
 		Fighter enemy = fighter.AddComponent("Fighter") as Fighter;
 		enemy.id = fighterID;
 		fighterID++;

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 	GameObject playerFighter;
 	Dictionary<int,GameObject> enemies = new Dictionary<int,GameObject>();
 
-	bool running = false;
+	public bool running = false;
 	int level = 1;
 	int playerLives = 0;
 
@@ -26,15 +26,20 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		spawnEnemy();
+		if (running) runningGameMethods ();
+	}
+	
+	void runningGameMethods () {
+		spawnEnemy ();
 	}
 	
 	// Spawning //
 	
 	void spawnEnemy () {
-		if (running && Time.time - lastTimeEnemySpawned > CharacterConstants.levelSpawnRate[1]) {
+		if (Time.time - lastTimeEnemySpawned > CharacterConstants.levelSpawnRate[1]) {
 			GameObject enemy = FighterFactory.createBasicEnemy(generateEnemySpawnPosition());
 			enemies.Add(getFighterInfo (enemy).id,enemy);
+			lastTimeEnemySpawned = Time.time;
 		}
 	}
 	
@@ -45,7 +50,8 @@ public class GameController : MonoBehaviour {
 	// Combat and Movement //
 	
 	public void setPlayerMovement (string direction, bool setting) {
-		if (direction == "left") 
+		Fighter fighter = playerFighter.GetComponent("Fighter") as Fighter;
+		fighter.setMovement(direction,setting);
 	}
 	
 	public void fighterDied (int id) {
