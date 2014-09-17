@@ -14,7 +14,7 @@ public static class EnemyHandler {
 	// Spawning //
 	
 	public static void spawnEnemy () {
-		if (Time.time - lastTimeEnemySpawned > CharacterConstants.levelSpawnRate[game.level]) {
+		if (Time.time - lastTimeEnemySpawned > GameConstants.levelSpawnRate[game.level]) {
 			Fighter enemy = FighterFactory.createBasicEnemy(generateEnemySpawnPosition());
 			enemies.Add(enemy);
 			lastTimeEnemySpawned = Time.time;

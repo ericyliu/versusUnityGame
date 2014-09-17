@@ -192,7 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b75e9d29da4430ca1de0c2bd6e4432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerFighter: {fileID: 0}
   running: 0
+  level: 1
 --- !u!114 &1522602797
 MonoBehaviour:
   m_ObjectHideFlags: 0

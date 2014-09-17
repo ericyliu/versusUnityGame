@@ -22,8 +22,6 @@ public static class CharacterConstants {
 		{"BasicEnemy",basicEnemy}	
 	};
 	
-	public static float[] levelSpawnRate = new float[] {6,5,4.5f,4,3.5f,3,2.5f,2,1,.8f,.5f};
-	
 	static Dictionary<string,string> machineGun = new Dictionary<string, string>() {
 		{"firingSpeed",".5"},
 		{"bullet","BasicBullet"}

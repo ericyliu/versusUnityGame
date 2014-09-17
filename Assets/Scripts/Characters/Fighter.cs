@@ -46,9 +46,10 @@ public class Fighter : MonoBehaviour {
 		if (up) position.y += speed * Time.deltaTime;
 		if (down) position.y -= speed * Time.deltaTime;
 		
-		transform.position = new Vector3(position.x,transform.position.y,position.y);
-		
 		changeRotation ();
+		checkOutOfBounds ();
+		
+		transform.position = new Vector3(position.x,transform.position.y,position.y);
 	}
 	
 	void changeRotation () {
@@ -56,6 +57,18 @@ public class Fighter : MonoBehaviour {
 		if (left) transform.Rotate (Vector3.forward * 30);
 		if (right) transform.Rotate (Vector3.back * 30);
 	}
+	
+	void checkOutOfBounds () {
+		if (position.x < GameConstants.StageBoundingBox.x)
+			position.x = GameConstants.StageBoundingBox.x;
+		if (position.x > GameConstants.StageBoundingBox.z)
+			position.x = GameConstants.StageBoundingBox.z;
+		if (position.y < GameConstants.StageBoundingBox.y)
+			position.y = GameConstants.StageBoundingBox.y;
+		if (position.y > GameConstants.StageBoundingBox.w)
+			position.y = GameConstants.StageBoundingBox.w;
+			
+	}	
 	
 	// Combat //
 	void tryToFire () {
