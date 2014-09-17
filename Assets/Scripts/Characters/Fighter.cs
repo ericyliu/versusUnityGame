@@ -7,7 +7,6 @@ public class Fighter : MonoBehaviour {
 	public int health = 0;
 	public int maxHealth = 0;
 	public float speed = 0;
-	public float firingSpeed = 0; //ms
 	public string weapon = "";
 	
 	// Movement
@@ -22,6 +21,7 @@ public class Fighter : MonoBehaviour {
 	// Game Communication
 	GameController game;
 	public bool isPlayer = false;
+	public string type = "";
 
 	// Use this for initialization
 	void Start () {
@@ -59,6 +59,7 @@ public class Fighter : MonoBehaviour {
 	
 	// Combat //
 	void tryToFire () {
+		float firingSpeed = float.Parse(CharacterConstants.weapons[weapon]["firingSpeed"]);
 		if (firing && Time.time - lastTimeFired > firingSpeed) {
 			fire ();
 		}
@@ -67,8 +68,9 @@ public class Fighter : MonoBehaviour {
 	void fire () {
 		lastTimeFired = Time.time;
 		//Create bullet
-		Bullet bullet = BulletFactory.createBullet(weapon,this.gameObject);
-		game.bulletFired(bullet);
+		string bulletType = CharacterConstants.weapons[weapon]["bullet"];
+		Bullet bullet = BulletFactory.createBullet(bulletType,this.gameObject);
+		CombatHandler.bullets.Add(bullet);
 	}
 	
 	public void takeHit (Bullet bullet) {

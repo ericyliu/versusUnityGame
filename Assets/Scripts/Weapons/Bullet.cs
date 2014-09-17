@@ -38,12 +38,11 @@ public class Bullet : MonoBehaviour {
 	}
 	
 	public void hitTarget () {
-		Debug.Log("Hit target");
 		removeBullet ();
 	}
 				
 	void removeBullet () {
-		game.bulletDied(this);
+		CombatHandler.bulletDied(this);
 	}
 	
 	// Movement

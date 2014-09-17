@@ -5,7 +5,7 @@ public static class BulletFactory {
 
 	public static Bullet createBullet (string weapon, GameObject fighter) {
 		Bullet bullet = null;
-		if (weapon == "bullet") bullet = createBasicBullet (fighter);
+		if (weapon == "BasicBullet") bullet = createBasicBullet (fighter);
 		else Debug.LogError ("No such weapon exists");
 		return bullet;
 	}

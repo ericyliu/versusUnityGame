@@ -1,43 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 // Creates player fighter + enemy fighters
 
 public static class FighterFactory {
-
-	static int fighterID = 1;
 
 	public static Fighter createPlayerFighter (Vector2 position) {
 		GameObject fighterObject = loadMesh(position);
 		loadMaterial(fighterObject,"Materials/PlayerFighterMaterial");
 		fighterObject.name = "PlayerFighter";
 		
-		Fighter fighter = fighterObject.AddComponent("Fighter") as Fighter;
-		fighter.isPlayer = true;
-		fighter.health = (int) CharacterConstants.playerFighter["health"];
-		fighter.maxHealth = (int) CharacterConstants.playerFighter["health"];
-		fighter.speed = CharacterConstants.playerFighter["speed"];
-		fighter.firingSpeed = CharacterConstants.playerFighter["firingSpeed"];
-		fighter.weapon = "bullet";
-		fighter.position = position;
+		Fighter fighter = loadFighterStats ("PlayerFighter", position, fighterObject);
 		
+		fighter.isPlayer = true;
 		return fighter;
 	}
 	
 	public static Fighter createBasicEnemy (Vector2 position) {
+	
 		GameObject fighterObject = loadMesh (position);
 		fighterObject.name = "BasicEnemy";
 		
-		Fighter fighter = fighterObject.AddComponent("Fighter") as Fighter;
-		fighterID++;
-		fighter.health = (int) CharacterConstants.basicEnemy["health"];
-		fighter.maxHealth = (int) CharacterConstants.basicEnemy["health"];
-		fighter.speed = CharacterConstants.basicEnemy["speed"];
-		fighter.firingSpeed = CharacterConstants.basicEnemy["firingSpeed"];
-		fighter.weapon = "energyBall";
-		fighter.position = position;
+		Fighter fighter = loadFighterStats ("BasicEnemy", position, fighterObject);
 		
 		return fighter;
+		
 	}
 	
 	static GameObject loadMesh (Vector2 position) {
@@ -50,6 +38,17 @@ public static class FighterFactory {
 	static void loadMaterial (GameObject fighter, string source) {
 		MeshRenderer fighterRenderer = fighter.GetComponent<MeshRenderer>();
 		fighterRenderer.material = Resources.Load (source,typeof(Material)) as Material;
+	}
+	
+	static Fighter loadFighterStats (string type, Vector2 position, GameObject fighterObject) {
+		Fighter fighter = fighterObject.AddComponent("Fighter") as Fighter;
+		fighter.health = Int32.Parse(CharacterConstants.fighters[type]["health"]);
+		fighter.maxHealth = Int32.Parse(CharacterConstants.fighters[type]["health"]);
+		fighter.speed = Int32.Parse(CharacterConstants.fighters[type]["speed"]);
+		fighter.weapon = CharacterConstants.fighters[type]["weapon"];
+		fighter.type = type;
+		fighter.position = position;
+		return fighter;
 	}
 	
 	
