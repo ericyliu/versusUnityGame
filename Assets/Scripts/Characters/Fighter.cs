@@ -2,31 +2,40 @@
 using System.Collections;
 
 public class Fighter : MonoBehaviour {
-	public int id;
-	//Stats
+	
+	// Stats
 	public int health = 0;
 	public int maxHealth = 0;
 	public float speed = 0;
 	public float firingSpeed = 0; //ms
 	public string weapon = "";
-	//Movement
-	Vector2 position;
-	int rotation = 0;
+	
+	// Movement
+	public Vector2 position;
 	bool left = false, right = false, up = false, down = false;
-	//Combat
+	
+	// Combat
 	bool firing = false;
 	float lastTimeFired = 0f;
+	public bool dead = false;
+
+	// Game Communication
+	GameController game;
+	public bool isPlayer = false;
 
 	// Use this for initialization
 	void Start () {
-		
+		game = GameObject.Find("Application").GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
+	
 	void Update () {
-		if (health <= 0) callDeath ();
-		move ();
-		tryToFire ();
+		if (game.running) {
+			if (health <= 0) callDeath ();
+			move ();
+			tryToFire ();
+		}
 	}
 	
 	// Movement //
@@ -37,11 +46,18 @@ public class Fighter : MonoBehaviour {
 		if (up) position.y += speed * Time.deltaTime;
 		if (down) position.y -= speed * Time.deltaTime;
 		
-		transform.position = new Vector3(position.x,position.y,transform.position.z);
+		transform.position = new Vector3(position.x,transform.position.y,position.y);
+		
+		changeRotation ();
+	}
+	
+	void changeRotation () {
+		transform.rotation = Quaternion.identity;
+		if (left) transform.Rotate (Vector3.forward * 30);
+		if (right) transform.Rotate (Vector3.back * 30);
 	}
 	
 	// Combat //
-	
 	void tryToFire () {
 		if (firing && Time.time - lastTimeFired > firingSpeed) {
 			fire ();
@@ -51,6 +67,12 @@ public class Fighter : MonoBehaviour {
 	void fire () {
 		lastTimeFired = Time.time;
 		//Create bullet
+		Bullet bullet = BulletFactory.createBullet(weapon,this.gameObject);
+		game.bulletFired(bullet);
+	}
+	
+	public void takeHit (Bullet bullet) {
+		takeDamage (bullet.damage);
 	}
 	
 	void takeDamage(int damage) {
@@ -58,10 +80,7 @@ public class Fighter : MonoBehaviour {
 	}
 	
 	void callDeath () {
-		//Play death animation
-		
-		//Report death
-		(GameObject.Find("GameMaster").GetComponent("GameController") as GameController).fighterDied (id);
+		game.fighterDied (this);
 	}
 	
 	// Public Functions//
@@ -71,5 +90,9 @@ public class Fighter : MonoBehaviour {
 		if (direction == "down") down = truth;
 		if (direction == "left") left = truth;
 		if (direction == "right") right = truth;
+	}
+	
+	public void setFiring (bool setting) {
+		firing = setting;
 	}
 }

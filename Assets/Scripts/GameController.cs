@@ -6,10 +6,14 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
-	GameMaster game;
+	Fighter playerFighter;
+	List<Fighter> enemies = new List<Fighter>();
+	List<Bullet> bullets = new List<Bullet>();
 
-	GameObject playerFighter;
-	Dictionary<int,GameObject> enemies = new Dictionary<int,GameObject>();
+	List<Fighter> deadEnemies = new List<Fighter>();
+	List<Bullet> deadBullets = new List<Bullet>();
+	
+	
 
 	public bool running = false;
 	int level = 1;
@@ -19,26 +23,31 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		game = GameObject.Find ("GameMaster").GetComponent("GameMaster") as GameMaster;
+		
 	}
-	
-	
 	
 	// Update is called once per frame
 	void Update () {
-		if (running) runningGameMethods ();
+		if (running) runGameMethods ();
 	}
 	
-	void runningGameMethods () {
+	void runGameMethods () {
 		spawnEnemy ();
+		checkHits ();
+		removeBullets ();
+		removeEnemies ();
 	}
 	
 	// Spawning //
 	
+	void spawnPlayer () {
+		playerFighter = FighterFactory.createPlayerFighter(Vector2.zero);
+	}
+
 	void spawnEnemy () {
-		if (Time.time - lastTimeEnemySpawned > CharacterConstants.levelSpawnRate[1]) {
-			GameObject enemy = FighterFactory.createBasicEnemy(generateEnemySpawnPosition());
-			enemies.Add(getFighterInfo (enemy).id,enemy);
+		if (Time.time - lastTimeEnemySpawned > CharacterConstants.levelSpawnRate[level]) {
+			Fighter enemy = FighterFactory.createBasicEnemy(generateEnemySpawnPosition());
+			enemies.Add(enemy);
 			lastTimeEnemySpawned = Time.time;
 		}
 	}
@@ -48,29 +57,72 @@ public class GameController : MonoBehaviour {
 	}
 	
 	// Combat and Movement //
-	
 	public void setPlayerMovement (string direction, bool setting) {
-		Fighter fighter = playerFighter.GetComponent("Fighter") as Fighter;
-		fighter.setMovement(direction,setting);
+		playerFighter.setMovement(direction,setting);
 	}
 	
-	public void fighterDied (int id) {
-		if (id == 0) playerDied ();
-		else {
-			enemies.Remove(id);
+	public void setPlayerFiring (bool setting) {
+		playerFighter.setFiring(setting);
+	}
+	
+	public void bulletFired (Bullet bullet) {
+		bullets.Add(bullet);
+	}
+	
+	void checkHits () {
+		foreach (Bullet bullet in bullets) {
+			checkHitFighter (bullet, playerFighter);
+			foreach (Fighter enemy in enemies) {
+				checkHitFighter(bullet, enemy);
+			}
 		}
+	}
+	
+	void checkHitFighter (Bullet bullet, Fighter fighter) {
+		if (bullet.collider.bounds.Intersects(fighter.collider.bounds)) {
+			fighter.takeHit (bullet);
+			bullet.hitTarget();
+		}
+	}
+	
+	// Handle Death //
+	
+	public void bulletDied (Bullet bullet) {
+		deadBullets.Add (bullet);
+	}
+	
+	public void fighterDied (Fighter fighter) {
+		if (fighter.isPlayer) playerDied ();
+		else deadEnemies.Add (fighter);
 	}
 	
 	public void playerDied () {
 		playerLives--;
+		GameObject.Destroy(playerFighter.gameObject);
 		if (playerLives < 0) endGame ();
 		else playerFighter = FighterFactory.createPlayerFighter (Vector2.zero);
+	}
+	
+	public void removeBullets () {
+		foreach (Bullet bullet in deadBullets) {
+			bullets.Remove(bullet);
+			GameObject.Destroy(bullet.gameObject);
+		}
+		deadBullets.Clear();
+	}
+	
+	public void removeEnemies () {
+		foreach (Fighter fighter in deadEnemies) {
+			enemies.Remove(fighter);
+			GameObject.Destroy(fighter.gameObject);
+		}
+		deadEnemies.Clear();
 	}
 	
 	// Game State //
 	
 	public void startGame () {
-		playerFighter = FighterFactory.createPlayerFighter(Vector2.zero);
+		spawnPlayer();
 		playerLives = 3;
 		running = true;
 	}
@@ -84,7 +136,7 @@ public class GameController : MonoBehaviour {
 		//Remove player fighter
 		playerFighter = null;
 		//Remove enemies
-		enemies = new Dictionary<int,GameObject>();
+		enemies = new List<Fighter>();
 		
 		running = false;
 	}

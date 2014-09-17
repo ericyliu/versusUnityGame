@@ -3,13 +3,13 @@ using System.Collections;
 
 public class MainMenu : Menu {
 
-	GameMaster game;
+	ApplicationController app;
 	
 	
 	
 	// Use this for initialization
 	void Start () {
-		game = GameObject.Find("GameMaster").GetComponent("GameMaster") as GameMaster;
+		app = GameObject.Find("Application").GetComponent<ApplicationController>();
 		on = true;
 	}
 	
@@ -23,13 +23,13 @@ public class MainMenu : Menu {
 	// OnGUI is called once per frame
 	void OnGUI () {
 		if (on) {
-			if (GUI.Button(game.guiRects.menuRects["mainMenuSinglePlayer"],"Singe Player")) {
+			if (GUI.Button(app.guiRects.menuRects["mainMenuSinglePlayer"],"Singe Player")) {
 				singlePlayerInitiate ();
 			}
-			if (GUI.Button (game.guiRects.menuRects["mainMenuUseVersus"],"Use Versus")) {
+			if (GUI.Button (app.guiRects.menuRects["mainMenuUseVersus"],"Use Versus")) {
 				versusInitiate ();
 			}
-			if (GUI.Button (game.guiRects.menuRects["mainMenuExit"],"Quit")){
+			if (GUI.Button (app.guiRects.menuRects["mainMenuExit"],"Quit")){
 				quitGame (); 
 			}
 		}
@@ -44,7 +44,7 @@ public class MainMenu : Menu {
 	void singlePlayerInitiate () {
 		on = false;
 		MenuController.changeMenuTo("GameMenu");
-		game.control.startGame();
+		app.game.startGame();
 	}
 	
 	// Quit Game

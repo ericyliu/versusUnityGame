@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class CharacterConstants {
+public static class CharacterConstants {  
 
 	public static Dictionary<string,float> playerFighter = new Dictionary<string,float>() {
 		{"health",100},
-		{"speed",20},
+		{"speed",10},
 		{"firingSpeed", .500f},
 		{"hitboxX",10},
 		{"hitboxY",10}
@@ -14,7 +14,7 @@ public static class CharacterConstants {
 	
 	public static Dictionary<string,float> basicEnemy = new Dictionary<string,float>() {
 		{"health",10},
-		{"speed",10},
+		{"speed",5},
 		{"firingSpeed", 1},
 		{"hitboxX",10},
 		{"hitboxY",10}

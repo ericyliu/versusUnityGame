@@ -147,11 +147,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1522602795}
-  - 114: {fileID: 1522602794}
   - 114: {fileID: 1522602796}
   - 114: {fileID: 1522602797}
+  - 114: {fileID: 1522602794}
   m_Layer: 0
-  m_Name: GameMaster
+  m_Name: Application
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,11 +165,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1522602793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7b2b7b4786148dba7195094937eaaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bef88b4f3f4942b1ae35118b23ae150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   usingVersus: 0
-  control: {fileID: 0}
+  game: {fileID: 0}
 --- !u!4 &1522602795
 Transform:
   m_ObjectHideFlags: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b75e9d29da4430ca1de0c2bd6e4432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  running: 0
 --- !u!114 &1522602797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,8 +263,8 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -278,8 +279,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1545497995}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

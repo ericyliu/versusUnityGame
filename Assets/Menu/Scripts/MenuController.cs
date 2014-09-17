@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public static class MenuController {
 
 	public static void changeMenuTo(string menu) {
-		GameMaster game = GameObject.Find ("GameMaster").GetComponent("GameMaster") as GameMaster;
-		foreach (KeyValuePair<string,Component> entry in game.menus) {
+		ApplicationController app = GameObject.Find ("Application").GetComponent<ApplicationController>();
+		foreach (KeyValuePair<string,Component> entry in app.menus) {
 			if (entry.Key == menu) (entry.Value as Menu).on = true;
 			else (entry.Value as Menu).on = false;
 		}
