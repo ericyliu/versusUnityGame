@@ -327,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: .713725507}
-  m_Sprite: {fileID: 21300000, guid: 4deb6c2d06711884bad9d2b4ceabbcd0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 075f09606bfb04cc2beb6b47c0b22b61, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -355,8 +355,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -196.899994, y: 281.200012}
-  m_SizeDelta: {x: 629, y: 472}
+  m_AnchoredPosition: {x: -284, y: 353}
+  m_SizeDelta: {x: 1051, y: 651}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1875345971
 GameObject:
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 70362bd37d99f5e43964271a6832f829, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b2b09f0583f94992aaca8e17ebb08e6, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
