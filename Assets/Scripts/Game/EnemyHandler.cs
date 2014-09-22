@@ -25,10 +25,6 @@ public static class EnemyHandler {
 		return Vector2.zero;
 	}
 	
-	// Enemy AI //
-	
-	
-	
 	// Handle Death //
 	
 	public static void removeEnemies () {

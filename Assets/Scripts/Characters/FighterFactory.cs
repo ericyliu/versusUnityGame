@@ -23,6 +23,7 @@ public static class FighterFactory {
 		fighterObject.name = "BasicEnemy";
 		
 		Fighter fighter = loadFighterStats ("BasicEnemy", position, fighterObject);
+//		loadAI ("BackAndForth", fighterObject);
 		
 		return fighter;
 		
@@ -51,5 +52,9 @@ public static class FighterFactory {
 		return fighter;
 	}
 	
+	static void loadAI (string type, GameObject fighterObject) {
+		EnemyAI ai = fighterObject.AddComponent<EnemyAI>();
+//		ai.updateBehavior(type);
+	}
 	
 }
