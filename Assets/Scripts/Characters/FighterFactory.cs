@@ -23,7 +23,7 @@ public static class FighterFactory {
 		fighterObject.name = "BasicEnemy";
 		
 		Fighter fighter = loadFighterStats ("BasicEnemy", position, fighterObject);
-//		loadAI ("BackAndForth", fighterObject);
+		loadAI ("BackAndForth", fighterObject);
 		
 		return fighter;
 		
@@ -47,6 +47,7 @@ public static class FighterFactory {
 		fighter.maxHealth = Int32.Parse(CharacterConstants.fighters[type]["health"]);
 		fighter.speed = Int32.Parse(CharacterConstants.fighters[type]["speed"]);
 		fighter.weapon = CharacterConstants.fighters[type]["weapon"];
+		fighter.firingSpeed = float.Parse(CharacterConstants.weapons[fighter.weapon]["firingSpeed"]);
 		fighter.type = type;
 		fighter.position = position;
 		return fighter;
@@ -54,7 +55,7 @@ public static class FighterFactory {
 	
 	static void loadAI (string type, GameObject fighterObject) {
 		EnemyAI ai = fighterObject.AddComponent<EnemyAI>();
-//		ai.updateBehavior(type);
+		ai.tagBehavioralUpdate(type);
 	}
 	
 }

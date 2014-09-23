@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour {
 	
 	float startTime;
 	
-	public Vector3 direction;
+	public Vector3 direction = Vector3.forward;
 	
 	GameController game;
 	
@@ -19,9 +19,6 @@ public class Bullet : MonoBehaviour {
 	protected void Start () {
 		game = GameObject.Find("Application").GetComponent<GameController>();
 		startTime = Time.time;
-		
-		// Default values
-		direction = Vector3.forward;
 	}
 	
 	// Update is called once per frame

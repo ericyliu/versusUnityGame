@@ -5,10 +5,10 @@ public class BasicBullet : Bullet {
 
 	// Use this for initialization
 	new void Start () {
-		damage = 5;
+		base.Start();
+		damage = 10;
 		speed = 20;
 		decayTime = 2;
-		base.Start();
 	}
 	
 }

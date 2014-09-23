@@ -37,7 +37,10 @@ public class GameController : MonoBehaviour {
 		playerLives--;
 		GameObject.Destroy(playerFighter.gameObject);
 		if (playerLives < 0) endGame ();
-		else playerFighter = FighterFactory.createPlayerFighter (Vector2.zero);
+		else {
+			spawnPlayer ();
+			EnemyHandler.resetAI ();
+		}
 	}
 	
 	public void fighterDied (Fighter fighter) {

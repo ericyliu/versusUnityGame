@@ -11,7 +11,7 @@ public static class CharacterConstants {
 	};
 	
 	static Dictionary<string,string> basicEnemy = new Dictionary<string,string>() {
-		{"health","10"},
+		{"health","20"},
 		{"speed","5"},
 		{"worth","10"},
 		{"weapon","MachineGun"}

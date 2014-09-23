@@ -25,7 +25,7 @@ public static class BulletFactory {
 		Vector3 position = fighter.transform.position 
 						+ (Vector3.Scale (fighter.transform.forward, 
 										  fighter.collider.bounds.extents + 
-										  new Vector3(bulletSize,bulletSize,bulletSize))); 
+										  new Vector3(bulletSize,bulletSize,bulletSize)));
 		return position;
 	}
 	

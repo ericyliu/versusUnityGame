@@ -25,6 +25,14 @@ public static class EnemyHandler {
 		return Vector2.zero;
 	}
 	
+	// AI //
+	
+	public static void resetAI () {
+		foreach (Fighter fighter in enemies) {
+			fighter.GetComponent<EnemyAI>().reset();
+		}
+	}
+	
 	// Handle Death //
 	
 	public static void removeEnemies () {
